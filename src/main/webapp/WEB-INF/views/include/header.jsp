@@ -32,9 +32,6 @@
 			<section>
 			<div class="d-flex justify-content-between">
 			<div class="jumbotron">
-				<h1>masuperdiscographie.com</h1>
-				<p>
-					<spring:message code="views.header.jumbotron.p" />
-				</p>
+				<h1>Application de Gestion Scolaire</h1>
 			</div>
 			</section>
