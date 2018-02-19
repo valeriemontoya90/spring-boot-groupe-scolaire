@@ -31,7 +31,7 @@
 		<tbody class="table-hover">
 			<c:forEach items="${listeSalles}" var="salle">
 				<tr>
-					<th scope="row"><a href="<c:url value="/salles/show/${salle.id}"/>">ID: ${salle.id}</a></th>
+					<th scope="row"><a href="<c:url value="/salles/${salle.id}"/>">ID: ${salle.id}</a></th>
 					<td>${salle.nom}</td>
 					<td>${salle.capacite}</td>
 					<td><a href="<c:url value="/salles/edit/${salle.id}"/>">éditer</a></td>

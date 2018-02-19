@@ -57,6 +57,14 @@ public class SalleController {
 		return "salle/listSalles";
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public String getArtisteDetail(Model model, @PathVariable("id") int id) {
+		Salle salle = salleDao.findByPrimaryKey(id);
+		model.addAttribute("salleFromDb", salle);
+		
+		return "salle/showSalle";
+	}
+	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public String deleteArtiste(Model model, @PathVariable("id") int id) {
 		Salle salle = salleDao.findByPrimaryKey(id);
