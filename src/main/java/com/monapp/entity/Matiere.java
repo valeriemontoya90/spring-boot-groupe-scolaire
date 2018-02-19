@@ -33,11 +33,10 @@ public class Matiere {
         super();
     }
 
-    public Matiere(String nom, Couleur couleur, List<Salle> listSalle) {
+    public Matiere(String nom, Couleur couleur) {
         super();
         this.nom = nom;
         this.couleur = couleur;
-        this.listSalles = listSalle;
     }
 
     public int getId() {

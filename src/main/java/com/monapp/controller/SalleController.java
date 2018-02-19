@@ -1,5 +1,6 @@
 package com.monapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.monapp.dao.SalleDao;
+import com.monapp.entity.Couleur;
+import com.monapp.entity.Matiere;
 import com.monapp.entity.Salle;
 import com.monapp.entity.validator.SalleValidator;
 
@@ -29,6 +32,14 @@ public class SalleController {
 	public String addSalle(Model model) {
 		Salle salle = new Salle();
 		model.addAttribute("salle", salle);
+		
+		List<Matiere> matieres = new ArrayList<>();
+		matieres.add(new Matiere("SVT", Couleur.Vert));
+		matieres.add(new Matiere("Maths", Couleur.Rouge));
+		matieres.add(new Matiere("Physique", Couleur.Bleu));
+		model.addAttribute("matieres", matieres);
+		model.addAttribute("actionPage", "Ajouter");
+		
 		return "salle/addSalle";
 	}
 	
@@ -46,6 +57,18 @@ public class SalleController {
 		}
 
 		return "redirect:/salles/list";
+	}
+	
+	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
+	public String getAddNewArtistForm(@PathVariable(value="id") int id, Model model) {
+		Salle salle = salleDao.findByPrimaryKey(id);
+		if(salle == null) {
+			return "redirect:/error";
+		}
+		model.addAttribute("salle", salle);
+		model.addAttribute("actionPage", "Editer");
+		
+		return "salle/addSalle";
 	}
 	
 	@RequestMapping(value="/list")

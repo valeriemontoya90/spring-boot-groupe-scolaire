@@ -23,10 +23,10 @@
 		<li>Capacite: ${salleFromDb.capacite}</li> 
 	</ul>
 	<h4>Liste des matières exclues</h4>
-	<%-- <ul>
-	<c:forEach items="${artisteFromDb.CDs}" var="cd">
-		<li><a href="<c:url value="/cd/${cd.id}" />">${cd.nom}( ${cd.anneeProduction}, ${cd.nombrePistes} pistes )</a></li>		
+	<ul>
+	<c:forEach items="${salleFromDb.matieresExclues}" var="matieresExclues">
+		<li>${matieresExclues.nom}</li>		
 	</c:forEach>
-	</ul> --%>
+	</ul>
 </section>
 <c:import url="../include/footer.jsp" />
