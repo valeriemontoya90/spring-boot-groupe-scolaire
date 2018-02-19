@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,7 +45,7 @@ public class SalleController {
 			salleDao.update(salle);
 		}
 
-		return "salle/listSalles";
+		return "redirect:/salles/list";
 	}
 	
 	@RequestMapping(value="/list")
@@ -52,6 +53,15 @@ public class SalleController {
 		List<Salle> liste = salleDao.findAll();
 		System.out.println("listeSalles = "+liste);
 		model.addAttribute("listeSalles", liste);
+		
 		return "salle/listSalles";
+	}
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public String deleteArtiste(Model model, @PathVariable("id") int id) {
+		Salle salle = salleDao.findByPrimaryKey(id);
+		salleDao.delete(salle);
+
+		return "redirect:/salles/list";
 	}
 }
