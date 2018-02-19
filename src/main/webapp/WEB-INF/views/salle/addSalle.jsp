@@ -10,8 +10,8 @@
 		<div class="card-header">Gestion des salles</div>
 		<div class="card-body">
 			<ul class="nav flex-column">
-				<li class="nav-item"><a class="nav-link active" href="/salles/list">Liste des salles</a></li>
-				<li class="nav-item"><a class="nav-link" href="/salles/add">Ajouter une salle</a></li>
+				<li class="nav-item"><a class="nav-link" href="list">Liste des salles</a></li>
+				<li class="nav-item"><a class="nav-link active" href="add">Ajouter une salle</a></li>
 			</ul>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
 package com.monapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,7 @@ import com.monapp.entity.Salle;
 import com.monapp.entity.validator.SalleValidator;
 
 @Controller
-@RequestMapping("/salle")
+@RequestMapping("/salles")
 public class SalleController {
 
 	@Autowired
@@ -42,6 +44,14 @@ public class SalleController {
 			salleDao.update(salle);
 		}
 
+		return "salle/listSalles";
+	}
+	
+	@RequestMapping(value="/list")
+	public String listArtist(Model model) {		
+		List<Salle> liste = salleDao.findAll();
+		System.out.println("listeSalles = "+liste);
+		model.addAttribute("listeSalles", liste);
 		return "salle/listSalles";
 	}
 }
