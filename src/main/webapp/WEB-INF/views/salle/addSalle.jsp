@@ -30,7 +30,7 @@
 		Matières exclues
 		<c:forEach items="${matieres}" var="matiere">
 		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="${matiere.nom}"
+			<input class="form-check-input" name="matieres[]" type="checkbox" value="${matiere.id}"
 				id="${matiere.id}"> <label class="form-check-label"
 				for="matieresExclues">${matiere.nom}</label>
 		</div>

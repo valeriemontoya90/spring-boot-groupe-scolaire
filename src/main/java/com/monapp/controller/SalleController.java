@@ -3,6 +3,8 @@ package com.monapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.monapp.dao.MatiereDao;
 import com.monapp.dao.SalleDao;
 import com.monapp.entity.Couleur;
 import com.monapp.entity.Matiere;
@@ -25,6 +28,9 @@ public class SalleController {
 
 	@Autowired
 	SalleDao salleDao;
+
+	@Autowired
+	MatiereDao matiereDao;
 	
 	Validator salleValidator = new SalleValidator();
 	
@@ -33,11 +39,9 @@ public class SalleController {
 		Salle salle = new Salle();
 		model.addAttribute("salle", salle);
 		
-		List<Matiere> matieres = new ArrayList<>();
-		matieres.add(new Matiere("SVT", Couleur.Vert));
-		matieres.add(new Matiere("Maths", Couleur.Rouge));
-		matieres.add(new Matiere("Physique", Couleur.Bleu));
+		List<Matiere> matieres = matiereDao.findAll();
 		model.addAttribute("matieres", matieres);
+		
 		model.addAttribute("actionPage", "Ajouter");
 		
 		return "salle/addSalle";
@@ -45,10 +49,16 @@ public class SalleController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSalle(
-			@ModelAttribute("salle") Salle salle, BindingResult result, Model model) {
+			@ModelAttribute("salle") Salle salle, BindingResult result, Model model, HttpServletRequest request) {
+		
+		String[] matieres = request.getParameterValues("matieres[]");
+		
+		for (String mat : matieres) {
+			Matiere matiere = matiereDao.findByPrimaryKey(Integer.valueOf(mat));
+			salle.getMatieresExclues().add(matiere);
+		}		
 		
 		salleValidator.validate(salle, result);
-		System.out.println("Je suis dans processAddSalle salle ="+salle);
 		
 		if (salle.getId() <= 0) {
 			salleDao.save(salle);			
@@ -60,7 +70,7 @@ public class SalleController {
 	}
 	
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
-	public String getAddNewArtistForm(@PathVariable(value="id") int id, Model model) {
+	public String editSalle(@PathVariable(value="id") int id, Model model) {
 		Salle salle = salleDao.findByPrimaryKey(id);
 		if(salle == null) {
 			return "redirect:/error";
@@ -72,7 +82,7 @@ public class SalleController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listArtist(Model model) {		
+	public String listSalles(Model model) {		
 		List<Salle> liste = salleDao.findAll();
 		System.out.println("listeSalles = "+liste);
 		model.addAttribute("listeSalles", liste);
@@ -81,7 +91,7 @@ public class SalleController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public String getArtisteDetail(Model model, @PathVariable("id") int id) {
+	public String getSalleDetail(Model model, @PathVariable("id") int id) {
 		Salle salle = salleDao.findByPrimaryKey(id);
 		model.addAttribute("salleFromDb", salle);
 		
@@ -89,7 +99,7 @@ public class SalleController {
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
-	public String deleteArtiste(Model model, @PathVariable("id") int id) {
+	public String deleteSalle(Model model, @PathVariable("id") int id) {
 		Salle salle = salleDao.findByPrimaryKey(id);
 		salleDao.delete(salle);
 
