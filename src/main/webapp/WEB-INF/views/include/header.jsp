@@ -26,12 +26,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8 ">
-			<section>
-			<div class="d-flex justify-content-between">
-			<div class="jumbotron">
-				<h1>masuperdiscographie.com</h1>
-			</div>
-			</section>
+	<div class="container fluid">
+		<header>
+		<div class="jumbotron">
+			<h1 class="display-4">Gestion scolaire</h1>
+			<p class="lead">Site de gestion des matières, des professeurs et des salles de classe</p>
+		</div>
+		</header>
+		<div class="row">
