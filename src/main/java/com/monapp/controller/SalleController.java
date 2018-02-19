@@ -17,11 +17,12 @@ public class SalleController {
 	SalleDao salleDao;
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String getAddNewArtistForm(Model model) {
-		model.addAttribute("action","Ajouter");
-		Salle salle = new Salle();
-		
-		model.addAttribute("salle",salle);
+	public String addSalle(Model model) {
+		return "salle/addSalle";
+	}
+	
+	@RequestMapping(value="/error", method=RequestMethod.GET)
+	public String addSalles(Model model) {
 		return "salle/addSalle";
 	}
 }

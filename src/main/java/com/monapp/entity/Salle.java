@@ -1,11 +1,14 @@
 package com.monapp.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,19 +18,25 @@ public class Salle {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="nom")
 	private String nom;
-	private List<Matiere> exclues;
+	
+	@Column(name="capacite")
 	private int capacite;
+
+	@ManyToMany
+	private List<Matiere> matieresExclues = new ArrayList<>();
 	
 	public Salle() {
 		super();
 	}
 	
-	public Salle(String nom, List<Matiere> exclues, int capacite) {
+	public Salle(String nom, int capacite, List<Matiere> matieresExclues) {
 		super();
 		this.nom = nom;
-		this.exclues = exclues;
 		this.capacite = capacite;
+		this.matieresExclues = matieresExclues;
 	}
 
 	public int getId() {
@@ -42,11 +51,11 @@ public class Salle {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public List<Matiere> getExclues() {
-		return exclues;
+	public List<Matiere> getMatieresExclues() {
+		return matieresExclues;
 	}
-	public void setExclues(List<Matiere> exclues) {
-		this.exclues = exclues;
+	public void setMatieresExclues(List<Matiere> matieresExclues) {
+		this.matieresExclues = matieresExclues;
 	}
 	public int getCapacite() {
 		return capacite;
@@ -57,6 +66,6 @@ public class Salle {
 	
 	@Override
 	public String toString() {
-		return "Salle [id=" + id + ", nom=" + nom + ", exclues=" + exclues + ", capacite=" + capacite + "]";
+		return "Salle [id=" + id + ", nom=" + nom + ", matieresExclues=" + matieresExclues + ", capacite=" + capacite + "]";
 	}
 }
