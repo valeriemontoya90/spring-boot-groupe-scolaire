@@ -21,11 +21,14 @@ public class Matiere {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
     @Column(name = "nom")
     private String nom;
+    
     @Column(name = "couleur")
     @Enumerated(EnumType.STRING)
     private Couleur couleur;
+    
     @ManyToMany(mappedBy = "matieresExclues", fetch = FetchType.EAGER)
     private List<Salle> listSalles = new ArrayList<>();
 

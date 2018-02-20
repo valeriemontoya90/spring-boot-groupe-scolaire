@@ -42,24 +42,31 @@ public class Salle {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getNom() {
 		return nom;
 	}
+	
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
 	public List<Matiere> getMatieresExclues() {
 		return matieresExclues;
 	}
+	
 	public void setMatieresExclues(List<Matiere> matieresExclues) {
 		this.matieresExclues = matieresExclues;
 	}
+	
 	public int getCapacite() {
 		return capacite;
 	}
+	
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}

@@ -9,7 +9,7 @@ import com.monapp.entity.Matiere;
 public class MatiereValidator implements Validator{
 
     @Override
-    public boolean supports(Class clazz) {
+	public boolean supports(Class<?> clazz) {
         return Matiere.class.equals(clazz);
     }
 

@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.monapp.entity.Salle;
 
-@Transactional
 @Repository
+@Transactional
 public class SalleDaoImpl implements SalleDao {
 
 	@PersistenceContext
