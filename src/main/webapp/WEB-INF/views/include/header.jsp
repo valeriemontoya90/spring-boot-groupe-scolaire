@@ -26,11 +26,3 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container fluid">
-		<header>
-		<div class="jumbotron">
-			<h1 class="display-4">Gestion scolaire</h1>
-			<p class="lead">Site de gestion des matières, des professeurs et des salles de classe</p>
-		</div>
-		</header>
-		<div class="row">

@@ -5,31 +5,40 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:import url="../include/header.jsp" />
-<section class="container">
-<table class="table table-hover">
-	<thead class="thead-inverse">
-		<tr>
-			<th>#</th>
-			<th>nom</th>
-			<th>couleur</th>
-			<th>edit</th>
-			<th>delete</th>
-		</tr>
-	</thead>
-	<tbody class="table-hover">
-		<c:forEach items="${matieres}" var="matiere">
-			<tr>
-				<th scope="row"><a href="<c:url value="/matiere/${matiere.id}" />">ID:
-						${matiere.id}</a></th>
-				<td>${matiere.nom}</td>
-				<td>${matiere.couleur}</td>
-				<td><a href="<c:url value="/matiere/edit/${matiere.id}" />">Edit</a></td>
-				<td><a href=" <c:url value="/matiere/del/${matiere.id}"/>">delete</a></td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-<a href="<c:url value='/matiere/add' />" class="btn btn-success btn-lg"
-	role="button" aria-disabled="true">Add</a>
-</section>
+<c:import url="matiere_header.jsp" />
+<div class="container fluid">
+	<div class="row">
+		<div class="col-3">
+			<c:import url="matiere_nav.jsp" />
+		</div>
+		<section class="col-9">
+			<h3>Liste des matières</h3>
+			<br>
+			<table class="table table-hover">
+				<thead class="thead-inverse">
+					<tr>
+						<th>#</th>
+						<th>Nom</th>
+						<th>Couleur</th>
+						<th>Editer</th>
+						<th>Supprimer</th>
+					</tr>
+				</thead>
+				<tbody class="table-hover">
+					<c:forEach items="${matieres}" var="matiere">
+						<tr>
+							<th scope="row"><a
+								href="<c:url value="/matieres/${matiere.id}" />">ID:
+									${matiere.id}</a></th>
+							<td>${matiere.nom}</td>
+							<td>${matiere.couleur}</td>
+							<td><a href="<c:url value="/matieres/edit/${matiere.id}" />">éditer</a></td>
+							<td><a href=" <c:url value="/matieres/del/${matiere.id}"/>">supprimer</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</section>
+	</div>
+</div>
 <c:import url="../include/footer.jsp" />

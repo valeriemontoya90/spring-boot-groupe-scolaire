@@ -5,28 +5,35 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:import url="../include/header.jsp" />
-<section class="container">
-	<form:form method="post" action="" modelAttribute="matiere">
-		<div class="form-group">
-			<form:hidden path="id" />
+<c:import url="matiere_header.jsp" />
+<div class="container fluid">
+	<div class="row">
+		<div class="col-3">
+			<c:import url="matiere_nav.jsp" />
 		</div>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Nom</label>
-			<form:input type="text" class="form-control" path="nom"
-				placeholder="NOM" />
-			<spring:hasBindErrors name="matiere">
-				<div class="alert alert-dark" role="alert">
-					<form:errors path="nom" />
+		<section class="col-9">
+			<h3>Ajout d'un matière</h3>
+			<br>
+			<form:form method="post" action="" modelAttribute="matiere">
+				<form:hidden path="id" />
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Nom</label>
+					<form:input type="text" class="form-control" path="nom"
+						placeholder="nom" />
+					<spring:hasBindErrors name="matiere">
+						<div class="alert alert-dark" role="alert">
+							<form:errors path="nom" />
+						</div>
+					</spring:hasBindErrors>
 				</div>
-			</spring:hasBindErrors>
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlSelect1">Couleur</label> 
-			<form:select class="form-control" id="exampleFormControlSelect1" path="couleur" items="${couleurs}" />
-			<div class="form-group">
-				<input type="submit" class="btn btn-primary" value="ok" />
-			</div>
-		</div>
-	</form:form>
-	</section>
-	<c:import url="../include/footer.jsp" />
+				<div class="form-group">
+					<label for="exampleFormControlSelect1">Couleur</label>
+					<form:select class="form-control" path="couleur"
+						items="${couleurs}" />
+				</div>
+				<input type="submit" class="btn btn-primary" value="Ajouter" />
+			</form:form>
+		</section>
+	</div>
+</div>
+<c:import url="../include/footer.jsp" />

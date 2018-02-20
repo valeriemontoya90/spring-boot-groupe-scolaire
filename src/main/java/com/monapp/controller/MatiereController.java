@@ -18,7 +18,7 @@ import com.monapp.entity.Matiere;
 import com.monapp.entity.validator.MatiereValidator;
 
 @Controller
-@RequestMapping(value="/matiere")
+@RequestMapping(value="/matieres")
 public class MatiereController {
 	
 	@Autowired
@@ -81,6 +81,6 @@ public class MatiereController {
 	public String deleteMatiere(Model model, @PathVariable("id") int id) {
 		Matiere ma = matiereDao.findByPrimaryKey(id);
 		matiereDao.delete(ma);
-		return "redirect:/matiere/list";
+		return "redirect:/matieres/list";
 	}
 }
