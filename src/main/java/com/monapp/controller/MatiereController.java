@@ -1,7 +1,5 @@
 package com.monapp.controller;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,18 +52,18 @@ public class MatiereController {
 		} else {
 			matiereDao.update(matiere);
 		}
-		return "redirect:/matiere/list";
+		return "matiere/listMatiere";
 	}
 	
 	@RequestMapping(value = "/edit/{id}")
 	public String getAddNewMatiere(@PathVariable("id") int id, Model model) {
 		model.addAttribute("action", "Editer");
 		model.addAttribute("couleurs", Couleur.values());
-		Matiere ce = matiereDao.findByPrimaryKey(id);
-		if (ce == null) {
+		Matiere ma = matiereDao.findByPrimaryKey(id);
+		if (ma == null) {
 			return "redirect:/error";
 		}
-		model.addAttribute("matiere", ce);
+		model.addAttribute("matiere", ma);
 		return "matiere/addMatiere";
 	}
 
@@ -78,12 +76,8 @@ public class MatiereController {
 
 	@RequestMapping(value = "/list")
 	public String listMatiere(Model model) {
-		List<Matiere> matiere = new ArrayList<>();
-		matiere = matiereDao.findAll();
-		model.addAttribute("matiere", matiere);
-		if (!model.containsAttribute("matiere")) {
-			model.addAttribute("matiere", new Matiere());
-		}
+		List<Matiere> matieres = matiereDao.findAll();
+		model.addAttribute("matieres", matieres);
 		model.addAttribute("couleurs", Couleur.values());
 		return "matiere/listMatiere";
 	}

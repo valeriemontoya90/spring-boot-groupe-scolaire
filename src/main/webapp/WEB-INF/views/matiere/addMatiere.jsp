@@ -5,7 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:import url="../include/header.jsp" />
-
 <section class="container">
 	<form:form method="post" action="" modelAttribute="matiere">
 		<div class="form-group">
