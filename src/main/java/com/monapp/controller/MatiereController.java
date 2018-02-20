@@ -18,12 +18,12 @@ import com.monapp.entity.Matiere;
 import com.monapp.entity.validator.MatiereValidator;
 
 @Controller
-@RequestMapping(value = "/matiere")
+@RequestMapping(value="/matiere")
 public class MatiereController {
-
+	
 	@Autowired
 	private MatiereDao matiereDao;
-
+	
 	Validator matiereValidator = new MatiereValidator();
 
 	@RequestMapping(value = "/add")
