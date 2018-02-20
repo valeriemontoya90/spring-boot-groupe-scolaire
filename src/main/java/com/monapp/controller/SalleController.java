@@ -1,6 +1,5 @@
 package com.monapp.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.monapp.dao.MatiereDao;
 import com.monapp.dao.SalleDao;
-import com.monapp.entity.Couleur;
 import com.monapp.entity.Matiere;
 import com.monapp.entity.Salle;
 import com.monapp.entity.validator.SalleValidator;
@@ -53,15 +51,17 @@ public class SalleController {
 		
 		String[] matieres = request.getParameterValues("matieres[]");
 		
-		for (String mat : matieres) {
-			Matiere matiere = matiereDao.findByPrimaryKey(Integer.valueOf(mat));
-			salle.getMatieresExclues().add(matiere);
-		}		
+		if(matieres != null) {
+			for (String mat : matieres) {
+				Matiere matiere = matiereDao.findByPrimaryKey(Integer.valueOf(mat));
+				salle.getMatieresExclues().add(matiere);
+			}
+		}
 		
 		salleValidator.validate(salle, result);
 		
 		if (salle.getId() <= 0) {
-			salleDao.save(salle);			
+			salleDao.save(salle);
 		} else {
 			salleDao.update(salle);
 		}
@@ -72,6 +72,9 @@ public class SalleController {
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String editSalle(@PathVariable(value="id") int id, Model model) {
 		Salle salle = salleDao.findByPrimaryKey(id);
+		List<Matiere> matiereList = matiereDao.findAll();
+		model.addAttribute("matieres", matiereList);
+		
 		if(salle == null) {
 			return "redirect:/error";
 		}
